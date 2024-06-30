@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:go_route_test2/pages/home/home_page.dart';
+import 'package:go_route_test2/routes/routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
+  final router = GoRouter(routes: $appRoutes);
   runApp(
-    const ProviderScope(child: MyApp()),
+    ProviderScope(
+      child: MyApp(
+        router: router,
+      ),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.router});
+
+  final GoRouter router;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -24,7 +33,6 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
     );
   }
 }

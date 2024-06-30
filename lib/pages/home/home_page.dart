@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_route_test2/pages/home/home_page.logic.dart';
-import 'package:go_route_test2/pages/new_note/new_note_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
@@ -67,11 +66,7 @@ class HomePage extends ConsumerWidget {
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const NewNotePage(),
-          ));
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
     );
