@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_route_test2/pages/home/home_page.logic.dart';
+import 'package:go_route_test2/routes/routes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
@@ -66,7 +67,9 @@ class HomePage extends ConsumerWidget {
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          NewNoteRoute().push(context);
+        },
         child: const Icon(Icons.add),
       ),
     );

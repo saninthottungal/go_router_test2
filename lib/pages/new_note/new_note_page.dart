@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_route_test2/pages/home/home_page.logic.dart';
 import 'package:go_route_test2/pages/home/home_page.state.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NewNotePage extends HookConsumerWidget {
@@ -47,7 +48,7 @@ class NewNotePage extends HookConsumerWidget {
                 .read(notesProvider.notifier)
                 .addNote(Note.create(title: title, description: desc));
           }
-          Navigator.pop(context);
+          context.pop();
         },
         label: const Text("Add Note"),
       ),
