@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_route_test2/pages/home/home_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    const ProviderScope(child: MyApp()),
   );
 }
 
