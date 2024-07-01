@@ -9,7 +9,8 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
-    final notes = ref.watch(notesProvider);
+    final notesAsDirect = ref.watch(notesProvider);
+    final notes = notesAsDirect.reversed.toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,42 +27,47 @@ class HomePage extends ConsumerWidget {
                   crossAxisCount: 2),
               itemCount: notes.length,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.all(5),
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: const Border.fromBorderSide(
-                      BorderSide(
-                        color: Colors.black54,
-                        width: 2,
+                return GestureDetector(
+                  onTap: () {
+                    NoteViewRoute($extra: notes[index]).push(context);
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: const Border.fromBorderSide(
+                        BorderSide(
+                          color: Colors.black54,
+                          width: 2,
+                        ),
                       ),
                     ),
-                  ),
-                  height: 50,
-                  width: 50,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 30,
-                        width: double.infinity,
-                        child: Text(
-                          notes[index].title,
-                          overflow: TextOverflow.ellipsis,
-                          style: textTheme.titleMedium,
-                        ),
-                      ),
-                      Expanded(
-                        child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 30,
                           width: double.infinity,
                           child: Text(
-                            textAlign: TextAlign.start,
-                            notes[index].description,
-                            overflow: TextOverflow.fade,
+                            notes[index].title,
+                            overflow: TextOverflow.ellipsis,
+                            style: textTheme.titleMedium,
                           ),
                         ),
-                      )
-                    ],
+                        Expanded(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              textAlign: TextAlign.start,
+                              notes[index].description,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
